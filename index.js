@@ -1,4 +1,5 @@
-let step = 10
+let step = 7
+let dx = 0
 
 function moveSuitCase(where) {
     let x = document.getElementById("suit-case").offsetLeft
@@ -12,10 +13,32 @@ function moveSuitCase(where) {
     console.log(x)
 }
 
-addEventListener('keypress', (event) => {
-    if (event.key == "a" || event.key == "A") {
-        moveSuitCase("left")
-    } else if (event.key == "d" || event.key == "D") {
+addEventListener('keydown', (event) => {
+    if (event.key == "a" || event.key == "A" || event.key == "ArrowLeft") {
+        dx=-1
+    } else if (event.key == "d" || event.key == "D" || event.key == "ArrowRight") {
+        dx=1
+    }
+    console.log(event.key)
+});
+
+addEventListener('keyup', (event) => {
+    dx=0
+    // if (event.key == "a" || event.key == "A" || event.key == "ArrowLeft") {
+    //     dx=-1
+    // } else if (event.key == "d" || event.key == "D" || event.key == "ArrowRight") {
+    //     dx=1
+    // }
+});
+
+function fun() {
+    if (dx == 1) {
         moveSuitCase("right")
     }
-});
+    if (dx == -1) {
+        moveSuitCase("left")
+    }
+    requestAnimationFrame(fun)
+}
+
+requestAnimationFrame(fun)
