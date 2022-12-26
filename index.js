@@ -18,7 +18,7 @@ function moveSuitCase(where) {
 }
 
 function moveRight() {
-    if (buttonRight == false) {
+    if (!buttonRight) {
         buttonRight = true
         dx+=1
         console.log(dx)
@@ -34,7 +34,7 @@ function stopRight() {
 }
 
 function moveLeft() {
-    if (buttonRight == false) {
+    if (!buttonRight) {
         buttonLeft = true
         dx-=1
         console.log(dx)
@@ -61,10 +61,10 @@ function moveShirt(where) {
 }
 
 addEventListener('keydown', (event) => {
-    if ((event.key == "a" || event.key == "A" || event.key == "ArrowLeft") && movingLeft==false) {
+    if ((event.key == "a" || event.key == "A" || event.key == "ArrowLeft") && !movingLeft) {
         movingLeft = true
         dx-=1
-    } else if ((event.key == "d" || event.key == "D" || event.key == "ArrowRight") && movingRight==false) {
+    } else if ((event.key == "d" || event.key == "D" || event.key == "ArrowRight") && !movingRight) {
         movingRight = true
         dx+=1
     }
