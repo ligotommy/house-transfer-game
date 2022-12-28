@@ -20,3 +20,8 @@
     top: 580px;
     right: 10px;
 }
+
+#shirt {
+    position: absolute;
+    width: 120px;
+}

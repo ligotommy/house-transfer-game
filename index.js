@@ -1,10 +1,14 @@
 let step = 7
+let shirtStep = 4
 let dx = 0
 let shirtDy = 0
 let movingLeft = false
 let buttonLeft = false
 let buttonRight = false
 let movingRight = false
+
+let shirtEl = document.getElementById("shirt")
+let suitCaseEl = document.getElementById("suit-case")
 
 function moveSuitCase(where) {
     let x = document.getElementById("suit-case").offsetLeft
@@ -49,14 +53,27 @@ function stopLeft() {
     }
 }
 
-function moveShirt(where) {
-    let x = document.getElementById("shirt").offsetTop
-    if (where === "left" && x>-10) {
-        x -= step
-        document.getElementById("suit-case").style.left = `${x}px`
-    } else if (where === "right" && x<1198) {
-        x += step
-        document.getElementById("suit-case").style.left = `${x}px`
+function startShirt() {
+    shirtEl.style.top = "-160px"
+    let x = Math.floor(Math.random()*1400) + 10
+    shirtEl.style.left = `${x}px`
+    let shirts = ["Orange-Shirt.png", "Purple-Shirt.png"]
+    let randShirtPath = shirts[Math.floor(Math.random()*shirts.length)]
+    document.getElementById("shirt").src = randShirtPath
+    shirtDy = 1
+}
+
+function moveShirt() {
+    let subStr = shirtEl.style.top.substring(0, shirtEl.style.top.length-2)
+    let y = parseInt(subStr)
+    if (y > 600 && (shirtEl.offsetLeft>suitCaseEl.offsetLeft-80 && suitCaseEl.offsetLeft+270>shirtEl.offsetLeft)) {
+    console.log(shirtEl.offsetLeft-100, suitCaseEl.offsetLeft, shirtEl.offsetLeft+300)
+    startShirt()
+    } else if (y > 900) {
+        startShirt()
+    } else {
+        y += shirtStep
+        shirtEl.style.top = `${y}px`
     }
 }
 
@@ -68,7 +85,6 @@ addEventListener('keydown', (event) => {
         movingRight = true
         dx+=1
     }
-    console.log(dx)
 });
 
 addEventListener('keyup', (event) => {
@@ -80,7 +96,6 @@ addEventListener('keyup', (event) => {
         movingRight = false
         dx-=1
     }
-    console.log(dx)
 });
 
 function fun() {
@@ -90,7 +105,13 @@ function fun() {
     if (dx <= -1) {
         moveSuitCase("left")
     }
+
+    if (shirtDy === 1) {
+        moveShirt()
+    }
+
     requestAnimationFrame(fun)
 }
 
+startShirt()
 requestAnimationFrame(fun)
