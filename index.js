@@ -66,9 +66,8 @@ function startShirt() {
 function moveShirt() {
     let subStr = shirtEl.style.top.substring(0, shirtEl.style.top.length-2)
     let y = parseInt(subStr)
-    if (y > 600 && (shirtEl.offsetLeft>suitCaseEl.offsetLeft-80 && suitCaseEl.offsetLeft+270>shirtEl.offsetLeft)) {
-    console.log(shirtEl.offsetLeft-100, suitCaseEl.offsetLeft, shirtEl.offsetLeft+300)
-    startShirt()
+    if (y > 600 && y < 700 && (shirtEl.offsetLeft>suitCaseEl.offsetLeft-80 && suitCaseEl.offsetLeft+270>shirtEl.offsetLeft)) {
+        startShirt()
     } else if (y > 900) {
         startShirt()
     } else {
