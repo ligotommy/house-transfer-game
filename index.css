@@ -24,4 +24,5 @@
 #shirt {
     position: absolute;
     width: 120px;
+    z-index: 1;
 }
