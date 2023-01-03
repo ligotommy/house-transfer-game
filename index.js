@@ -115,4 +115,4 @@ function fun() {
 startShirt()
 requestAnimationFrame(fun)
 
-console.log(URLSearchParams)
+console.log(URLSearchParams.arguments)
