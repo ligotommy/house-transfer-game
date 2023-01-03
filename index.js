@@ -6,6 +6,8 @@ let movingLeft = false
 let buttonLeft = false
 let buttonRight = false
 let movingRight = false
+const params = new URLSearchParams(document.location.search)
+const difficulty = params.get("difficulty")
 
 let shirtEl = document.getElementById("shirt")
 let suitCaseEl = document.getElementById("suit-case")
@@ -114,8 +116,3 @@ function fun() {
 
 startShirt()
 requestAnimationFrame(fun)
-
-let params = new URLSearchParams(document.location.search)
-let difficulty = params.get("difficulty")
-
-console.log(difficulty)
