@@ -115,7 +115,7 @@ function fun() {
 startShirt()
 requestAnimationFrame(fun)
 
-let params = new URLSearchParams()
+let params = new URLSearchParams(document.location.search)
 let difficulty = params.get("difficulty")
 
 console.log(difficulty)
