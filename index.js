@@ -6,6 +6,9 @@ let movingLeft = false
 let buttonLeft = false
 let buttonRight = false
 let movingRight = false
+
+const shirts = ["pictures/Orange-Shirt.png", "pictures/Purple-Shirt.png"]
+
 const params = new URLSearchParams(document.location.search)
 const difficulty = params.get("difficulty")
 
@@ -59,7 +62,6 @@ function startShirt() {
     shirtEl.style.top = "-160px"
     let x = Math.floor(Math.random()*1400) + 10
     shirtEl.style.left = `${x}px`
-    let shirts = ["Orange-Shirt.png", "Purple-Shirt.png"]
     let randShirtPath = shirts[Math.floor(Math.random()*shirts.length)]
     document.getElementById("shirt").src = randShirtPath
     shirtDy = 1
