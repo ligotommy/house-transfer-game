@@ -3,10 +3,10 @@
         <link rel="stylesheet" href="index.css">
     </head>
     <body>
-        <img draggable="false" id="shirt" src="" alt="">
+        <img draggable="false" id="item" src="" alt="">
         <img draggable="false" id="suit-case" src="pictures/suit-case.png" alt="">
-        <button id="left-button" onmousedown="moveLeft()" onmouseup="stopLeft()" onmouseout="stopLeft()"><</button>
-        <button id="right-button" onmousedown="moveRight()" onmouseup="stopRight()" onmouseout="stopRight()">></button>
+        <button id="left-button" onpointerdown="moveLeft()" onpointerup="stopLeft()" onpointerout="stopLeft()"><</button>
+        <button id="right-button" onpointerdown="moveRight()" onpointerup="stopRight()" onpointerout="stopRight()">></button>
         <script src="index.js"></script>
     </body>
 </html>
