@@ -2,12 +2,11 @@ let step = 6
 let itemStep = 3
 let dx = 0
 let shirtDy = 0
+const buttons = document.querySelectorAll("button")
 let movingLeft = false
 let buttonLeft = false
 let buttonRight = false
 let movingRight = false
-
-console.log(window.innerWidth, screen.height)
 
 function mobileCheck() {
     let check = false;
@@ -16,7 +15,13 @@ function mobileCheck() {
 };
 
 const isMobile = mobileCheck()
-document.querySelector("h1").textContent = isMobile
+
+if (isMobile) {
+    buttons[0].style.display = "none"
+    buttons[1].style.display = "none"
+
+    screen.orientation.lock("landscape-primary")
+}
 
 
 const isKeyLeft = (event) => event.key == "a" || event.key == "A" || event.key == "ArrowLeft"
@@ -139,9 +144,7 @@ function fun() {
         moveSuitCase("right")
     } else if (dx <= -1) {
         moveSuitCase("left")
-    }
-
-    if (shirtDy === 1) {
+    } if (shirtDy === 1) {
         moveItem()
     }
 
@@ -151,4 +154,4 @@ function fun() {
 startItem()
 // requestAnimationFrame(fun)
 
-setInterval(fun, 5)
+let interval = setInterval(fun, 5)
