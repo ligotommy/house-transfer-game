@@ -1,7 +1,7 @@
 #suit-case {
     position: absolute;
     width: 300px;
-    top: 630px;
+    bottom: 30px;
     left: 600px;
 }
 
@@ -9,7 +9,6 @@
     position: absolute;
     width: 50px;
     height: 50px;
-    top: 580px;
     left: 10px;
 }
 
@@ -17,7 +16,6 @@
     position: absolute;
     width: 50px;
     height: 50px;
-    top: 580px;
     right: 10px;
 }
 
@@ -29,4 +27,9 @@
 
 body {
     overflow: hidden;
+}
+
+button {
+    z-index: 2;
+    bottom: 200px;
 }
