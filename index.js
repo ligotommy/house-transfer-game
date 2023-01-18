@@ -3,6 +3,8 @@ let itemStep = 3
 let dx = 0
 let shirtDy = 0
 const buttons = document.querySelectorAll("button")
+let overlayDiv = document.getElementById("overlay")
+let container = document.getElementById("container")
 let movingLeft = false
 let buttonLeft = false
 let buttonRight = false
@@ -15,6 +17,8 @@ let firstAnimationFinished = false
 let secondAnimationFinished = false
 let firstAnimationStarted = false
 let secondAnimationStarted = false
+
+let paused = false
 
 let a = 0
 let b = 0
@@ -108,7 +112,7 @@ function moveSuitCase(where) {
     if (where === "left" && x>0) {
         x -= step
         suitCaseEl.style.left = `${x}px`
-    } else if (where === "right" && x<window.innerWidth-300) {
+    } else if (where === "right" && x<window.innerWidth-320) {
         x += step
         suitCaseEl.style.left = `${x}px`
     }
@@ -147,6 +151,7 @@ function stopLeft() {
 }
 
 function startItem() {
+    itemEl.style.bottom = "unset"
     itemEl.style.top = "-200px"
     let x = Math.floor(Math.random()*(window.innerWidth-160)) + 40
     itemEl.style.left = `${x}px`
@@ -189,6 +194,12 @@ addEventListener('keydown', (event) => {
     } else if (isKeyRight(event) && !movingRight) {
         movingRight = true
         dx+=1
+    } if (event.key == "Escape") {
+        if (paused) {
+            resumeGame()
+        } else {
+            pauseGame()
+        }
     }
 });
 
@@ -203,28 +214,60 @@ addEventListener('keyup', (event) => {
     }
 });
 
+function pauseGame() {
+    paused = true
+    clearInterval(interval0)
+    clearInterval(interval1)
+    overlayDiv.style.display = "block"
+    containerChildren = container.children
+    for (let i=0; i<containerChildren.length; i++) {
+        containerChildren[i].setAttribute("class", "blur")
+    }
+}
+
+function resumeGame() {
+    paused = false
+    if (firstAnimationStarted && !firstAnimationFinished) {
+        interval0 = setInterval(animate, 20)
+    } if (secondAnimationStarted && !secondAnimationFinished) {
+        interval1 = setInterval(nextFrame, 100)
+    }
+    overlayDiv.style.display = "none"
+    for (let i=0; i<container.children.length; i++) {
+        container.children[i].setAttribute("class", "none")
+    }
+}
+
 function fun() {
-    if (!firstAnimationStarted) {
-        suitCaseEl.src = "pictures/suit-case-frame-1.png"
-        suitCaseAnimation1()
-    } if (firstAnimationFinished && !secondAnimationStarted) {
-        suitCaseEl.style.top = "unset"
-        suitCaseEl.style.width = "1300px"
-        suitCaseEl.style.bottom = "0px"
-        suitCaseEl.style.left = "-70px"
-        suitCaseAnimation2()
-    } if (secondAnimationFinished) {
-        if (dx >= 1) {
-            moveSuitCase("right")
-        } else if (dx <= -1) {
-            moveSuitCase("left")
-        } if (shirtDy === 1) {
-            moveItem()
+    if (!paused) {
+        if ((window.innerWidth < 1100 || window.innerHeight < 700) && !isMobile) {
+            pauseGame()
+            setTimeout(function () {alert(`Screen is too small for the game.
+To continue expand the window.`)}, 5);
+        } else {
+            if (!firstAnimationStarted) {
+                suitCaseEl.src = "pictures/suit-case-frame-1.png"
+                suitCaseAnimation1()
+            } if (firstAnimationFinished && !secondAnimationStarted) {
+                suitCaseEl.style.top = "unset"
+                suitCaseEl.style.width = "1300px"
+                suitCaseEl.style.bottom = "0px"
+                suitCaseEl.style.left = "-70px"
+                suitCaseAnimation2()
+            } if (secondAnimationFinished) {
+                if (dx >= 1) {
+                    moveSuitCase("right")
+                } else if (dx <= -1) {
+                    moveSuitCase("left")
+                } if (shirtDy === 1) {
+                    moveItem()
+                }
+            }
         }
     }
+}
 
     // requestAnimationFrame(fun)
-}
 
 startItem()
 // requestAnimationFrame(fun)
