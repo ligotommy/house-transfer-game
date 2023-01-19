@@ -5,6 +5,9 @@ let shirtDy = 0
 const buttons = document.querySelectorAll("button")
 let overlayDiv = document.getElementById("overlay")
 let container = document.getElementById("container")
+const suitCaseEl = document.getElementById("suit-case")
+const itemEl = document.getElementById("item")
+
 let movingLeft = false
 let buttonLeft = false
 let buttonRight = false
@@ -26,7 +29,9 @@ let b = 0
 let suitCaseFrames = []
 for (i=0;i<19;i++) {
     suitCaseFrames.push(`pictures/suit-case-frame-${i+1}.png`)
+    suitCaseEl.src = `pictures/suit-case-frame-${i+1}.png`
 }
+suitCaseEl.src = "pictures/suit-case-frame-1.png"
 
 function nextFrame() {
     suitCaseEl.src = suitCaseFrames[frameNum]
@@ -99,13 +104,15 @@ const shirtsPaths = [
     "pictures/Yellow-Shirt.png",
     "pictures/Red-Shirt.png",
 ]
+
 const itemsPaths = shirtsPaths
+
+for (let i=0;i<itemsPaths.length;i++) {
+    itemEl.src = itemsPaths[i]
+}
 
 const params = new URLSearchParams(document.location.search)
 const difficulty = params.get("difficulty")
-
-const itemEl = document.getElementById("item")
-const suitCaseEl = document.getElementById("suit-case")
 
 function moveSuitCase(where) {
     let x = suitCaseEl.offsetLeft
