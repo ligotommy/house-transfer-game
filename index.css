@@ -27,6 +27,14 @@
 
 body {
     overflow: hidden;
+    margin: 0;
+}
+
+#background {
+    left: 0;
+    top: 0;
+    width: 2000px;
+    z-index: -1;
 }
 
 button {
